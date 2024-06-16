@@ -94,10 +94,8 @@ def create_and_save_image(user_description):
     image_resource = requests.get(image_url, stream=True)
     print(image_resource.status_code)
 
-    if len(user_description) < 12:
-        image_filename = f'{user_description}.png'
-    else:
-        image_filename = f'{user_description[:12]}.png'
+
+    image_filename = 'image01.png'
 
     if image_resource.status_code == 200:
         with open(image_filename, 'wb') as f:
