@@ -1,14 +1,15 @@
-#Scham mit Image_Generating
+#Scham mit Image_Generating v1.1
 import streamlit as st
 import os
+import time
 import openai
 import requests
 import shutil
 
-# Setze den API-Schlüssel
-#os.environ['OPENAI_API_KEY'] = 'sk-XXX'
-
 from openai import OpenAI
+
+
+# Setze den API-Schlüssel
 
 api_key = st.secrets["api"]["api_key"]
 assert api_key.startswith('sk-'), 'Error loading the API key. The API key starts with "sk-"'
@@ -32,8 +33,12 @@ questions = [
 bot_responses = list()
 messages = list()
 
+#system_prompt = 'Answer as concisely as possible.'
+#messages.append({'role': 'system', 'content': system_prompt})
+
 def chat_with_bot(user_input):
     messages.append({'role': 'user', 'content': user_input})
+
     completion = client.chat.completions.create(
         model='gpt-3.5-turbo',
         messages=messages,
@@ -45,13 +50,12 @@ def chat_with_bot(user_input):
     messages.append({'role': 'assistant', 'content': current_response})
     return current_response
 
-
 # user-description ohne Eingaben
-# user_description = "Eine Ente wackelt über die Straße"
+#description_prompt = "Eine Ente wackelt über die Straße"
 
 
 def create_artistic_description(responses):
-    user_description = (
+   description_prompt = (
         f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den Eingaben beruht:\n"
         f"1. Situation: {responses[0]}\n"
         f"2. Situation Details: {responses[1]}\n"
@@ -62,7 +66,7 @@ def create_artistic_description(responses):
     )
 
 
-    messages.append({'role': 'user', 'content': user_description})
+    messages.append({'role': 'user', 'content':description_prompt})
 
     completion = client.chat.completions.create(
         model='gpt-3.5-turbo',
@@ -73,38 +77,47 @@ def create_artistic_description(responses):
     artistic_description = completion.choices[0].message.content
     return artistic_description
 
-
-
-def create_and_save_image(user_description):
-
-
-    image_prompt = f'{user_description}, Egon Schiele Style,'
-    print(image_prompt)
-
+def create_image_url(description_prompt)
     response = client.images.generate(
         model='dall-e-3',
-        prompt=image_prompt,
-        n=1,
-        size='1024x1024'
+        prompt=description_prompt,
+        style='vivid',
+        size='1024x1024', # 1024x1792, 1792x1024 pixels
+        quality='standard',
+        n=1
     )
+    return response
 
-    image_url = response.data[0].url
-    print()
-    print(image_url)
-
-    image_resource = requests.get(image_url, stream=True)
-    print(image_resource.status_code)
+# def create_and_save_image(artistic_description):
 
 
-#    image_filename = 'image01.png'
+#     image_prompt = f'{description_prompt}, Egon Schiele Style,'
+#     print(image_prompt)
 
-    if image_resource.status_code == 200:
-        with open(image_filename, 'wb') as f:
-            shutil.copyfileobj(image_resource.raw, f)
-            return image_filename
-    else:
-        print('Error accessing the image!')
-        return False
+#     response = client.images.generate(
+#         model='dall-e-3',
+#         prompt=image_prompt,
+#         n=1,
+#         size='1024x1024'
+#     )
+
+#     image_url = response.data[0].url
+#     print()
+#     print(image_url)
+
+#     image_resource = requests.get(image_url, stream=True)
+#     print(image_resource.status_code)
+
+
+# #    image_filename = 'image01.png'
+
+#     if image_resource.status_code == 200:
+#         with open(image_filename, 'wb') as f:
+#             shutil.copyfileobj(image_resource.raw, f)
+#             return image_filename
+#     else:
+#         print('Error accessing the image!')
+#         return False
 
 # Debugging: Inhalt der Antwort anzeigen
 #    return response['data'][0]['url']
@@ -112,7 +125,7 @@ def create_and_save_image(user_description):
 
 #print(image_filename)
 
-from PIL import Image
+#from PIL import Image
 
 #Image.open(image_filename)
 
@@ -120,10 +133,12 @@ from PIL import Image
 #     image_filename = create_and_save_image(titles[_], 'white background')
 #     print(image_filename)
 
+
+
 if __name__ == '__main__':
     col1, col2 = st.columns([0.85, 0.15])
     with col1:
-        st.title('Scham mit Image_Generating')
+        st.title('Chat Bot')
     with col2:
         st.image('ai.png', width=70)
 
@@ -166,6 +181,5 @@ if __name__ == '__main__':
                     st.session_state.current_question_index += 1
                 elif st.session_state.current_question_index == len(questions) - 1:
                     artistic_description = create_artistic_description(st.session_state.responses)
-                    image_url = create_and_save_image(artistic_description)
-                    st.image(image_url, caption='Generated Image', use_column_width=True)
+                    st.write(f'Artistic Description: {artistic_description}')
                     st.session_state.current_question_index += 1
