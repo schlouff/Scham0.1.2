@@ -77,7 +77,7 @@ completion = client.chat.completions.create(
 artistic_description = completion.choices[0].message.content
 return artistic_description
 
-def create_image_url(description_prompt)
+def create_image_url(description_prompt):
     response = client.images.generate(
         model='dall-e-3',
         prompt=description_prompt,
