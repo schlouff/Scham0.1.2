@@ -66,7 +66,7 @@ def create_artistic_description(responses):
     )
 
 
-    messages.append({'role': 'user', 'content':description_prompt})
+messages.append({'role': 'user', 'content':description_prompt})
 
     completion = client.chat.completions.create(
         model='gpt-3.5-turbo',
