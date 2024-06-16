@@ -66,16 +66,16 @@ def create_artistic_description(responses):
     )
 
 
-messages.append({'role': 'user', 'content':description_prompt})
+    messages.append({'role': 'user', 'content':description_prompt})
 
-completion = client.chat.completions.create(
-    model='gpt-3.5-turbo',
-    messages=messages,
-    temperature=0.7,
-)
+    completion = client.chat.completions.create(
+        model='gpt-3.5-turbo',
+        messages=messages,
+        temperature=0.7,
+    )
 
-artistic_description = completion.choices[0].message.content
-return artistic_description
+    artistic_description = completion.choices[0].message.content
+    return artistic_description
 
 def create_image_url(description_prompt):
     response = client.images.generate(
