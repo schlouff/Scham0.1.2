@@ -1,3 +1,4 @@
+#Scham mit Image_Generating
 import streamlit as st
 import os
 import openai
@@ -122,7 +123,7 @@ from PIL import Image
 if __name__ == '__main__':
     col1, col2 = st.columns([0.85, 0.15])
     with col1:
-        st.title('Chat Bot')
+        st.title('Scham mit Image_Generating')
     with col2:
         st.image('ai.png', width=70)
 
