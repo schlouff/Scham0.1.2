@@ -95,7 +95,7 @@ def create_and_save_image(user_description):
     print(image_resource.status_code)
 
 
-    image_filename = 'image01.png'
+#    image_filename = 'image01.png'
 
     if image_resource.status_code == 200:
         with open(image_filename, 'wb') as f:
@@ -113,7 +113,7 @@ def create_and_save_image(user_description):
 
 from PIL import Image
 
-Image.open(image_filename)
+#Image.open(image_filename)
 
 # for _ in range(3):
 #     image_filename = create_and_save_image(titles[_], 'white background')
