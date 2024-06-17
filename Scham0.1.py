@@ -1,4 +1,4 @@
-#Scham mit Image_Generating v1.1
+#Scham mit Image_Generating v0.1
 import streamlit as st
 import os
 import time
@@ -53,7 +53,6 @@ def chat_with_bot(user_input):
 # user-description ohne Eingaben
 #description_prompt = "Eine Ente wackelt über die Straße"
 
-
 def create_artistic_description(responses):
    description_prompt = (
         f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den Eingaben beruht:\n"
@@ -64,7 +63,6 @@ def create_artistic_description(responses):
         f"5. Landscape: {responses[4]}\n"
         f"6. Animal (if applicable): {responses[5] if len(responses) > 5 else 'N/A'}"
     )
-
 
     messages.append({'role': 'user', 'content':description_prompt})
 
