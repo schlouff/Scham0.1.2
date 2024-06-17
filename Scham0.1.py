@@ -54,7 +54,7 @@ def chat_with_bot(user_input):
 #description_prompt = "Eine Ente wackelt über die Straße"
 
 def create_artistic_description(responses):
-   description_prompt = (
+    description_prompt = (
         f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den Eingaben beruht:\n"
         f"1. Situation: {responses[0]}\n"
         f"2. Situation Details: {responses[1]}\n"
