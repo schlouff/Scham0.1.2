@@ -84,7 +84,7 @@ def create_image_url(description_prompt):
         quality='standard',
         n=1
     )
-return response
+    return response
 
 # def create_and_save_image(artistic_description):
 
