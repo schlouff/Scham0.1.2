@@ -64,7 +64,7 @@ def create_artistic_description(responses):
         f"6. Animal (if applicable): {responses[5] if len(responses) > 5 else 'N/A'}"
     )
 
-    messages.append({'role': 'user', 'content':description_prompt})
+    messages.append({'role': 'user', 'content': description_prompt})
 
     completion = client.chat.completions.create(
         model='gpt-3.5-turbo',
