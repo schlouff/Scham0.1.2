@@ -84,7 +84,8 @@ def create_image_url(description_prompt):
         quality='standard',
         n=1
     )
-    return response
+    image_url = response.data[0].url
+    return image_url
 
 # def create_and_save_image(artistic_description):
 
@@ -180,4 +181,10 @@ if __name__ == '__main__':
                 elif st.session_state.current_question_index == len(questions) - 1:
                     artistic_description = create_artistic_description(st.session_state.responses)
                     st.write(f'Artistic Description: {artistic_description}')
+
+                    # Erzeuge die Bild-URL und zeige sie an
+                    image_url = create_image_url(artistic_description)
+                    st.write(f'Image URL: {image_url}')
+                    st.image(image_url)
+
                     st.session_state.current_question_index += 1
