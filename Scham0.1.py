@@ -1,5 +1,8 @@
 #Scham mit Image_Generating v0.1
 import streamlit as st
+
+from postcard_utils import create_a6_postcard
+
 import os
 import time
 import openai
@@ -186,5 +189,17 @@ if __name__ == '__main__':
                     image_url = create_image_url(artistic_description)
                     st.write(f'Image URL: {image_url}')
                     st.image(image_url)
+
+                    # A6-Postkarte erstellen
+                    postcard_file = create_a6_postcard(image_url)
+
+                    # Download-Button für die Postkarte hinzufügen
+                    with open(postcard_file, "rb") as file:
+                        btn = st.download_button(
+                            label="A6-Postkarte herunterladen",
+                            data=file,
+                            file_name="a6_postkarte.pdf",
+                            mime="application/pdf"
+                        )
 
                     st.session_state.current_question_index += 1
