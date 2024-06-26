@@ -2,3 +2,5 @@ streamlit
 openai
 requests
 pillow
+reportlab
+python-dotenv
