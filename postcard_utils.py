@@ -4,6 +4,7 @@ import requests
 from PIL import Image
 from reportlab.lib.pagesizes import A6
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
 
 
 def create_a6_postcard(image_url):
@@ -12,11 +13,8 @@ def create_a6_postcard(image_url):
         response = requests.get(image_url)
         response.raise_for_status()  # Fehler werfen, wenn der Request nicht erfolgreich war
 
-        # Bild mit Pillow öffnen und in PNG konvertieren
+        # Bild mit Pillow öffnen
         img = Image.open(io.BytesIO(response.content))
-        img_byte_arr = io.BytesIO()
-        img.save(img_byte_arr, format='PNG')
-        img_byte_arr = img_byte_arr.getvalue()
 
         # A6-Größe in Punkten (1 Punkt = 1/72 Zoll)
         a6_width, a6_height = A6
@@ -37,7 +35,8 @@ def create_a6_postcard(image_url):
             y_offset = (a6_height - new_height) / 2
 
             # Bild auf PDF zeichnen
-            c.drawImage(io.BytesIO(img_byte_arr), x_offset, y_offset, width=new_width, height=new_height)
+            img_reader = ImageReader(img)
+            c.drawImage(img_reader, x_offset, y_offset, width=new_width, height=new_height)
 
             # PDF speichern
             c.showPage()
