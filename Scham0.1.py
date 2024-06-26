@@ -190,16 +190,23 @@ if __name__ == '__main__':
                     st.write(f'Image URL: {image_url}')
                     st.image(image_url)
 
-                    # A6-Postkarte erstellen
-                    postcard_file = create_a6_postcard(image_url)
+                    try:
+                        # A6-Postkarte erstellen
+                        postcard_file = create_a6_postcard(image_url)
 
-                    # Download-Button für die Postkarte hinzufügen
-                    with open(postcard_file, "rb") as file:
-                        btn = st.download_button(
-                            label="A6-Postkarte herunterladen",
-                            data=file,
-                            file_name="a6_postkarte.pdf",
-                            mime="application/pdf"
-                        )
+                        # Download-Button für die Postkarte hinzufügen
+                        with open(postcard_file, "rb") as file:
+                            btn = st.download_button(
+                                label="A6-Postkarte herunterladen",
+                                data=file,
+                                file_name="a6_postkarte.pdf",
+                                mime="application/pdf"
+                            )
+
+                        # Lösche die temporäre Datei nach dem Download
+                        os.unlink(postcard_file)
+                    except Exception as e:
+                        st.error(f"Ein Fehler ist aufgetreten beim Erstellen der Postkarte: {str(e)}")
+                        print(f"Detailed error: {str(e)}")  # Dies wird in den Streamlit-Logs erscheinen
 
                     st.session_state.current_question_index += 1
