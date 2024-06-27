@@ -205,7 +205,7 @@ if __name__ == '__main__':
 
                         # Lösche die temporäre Datei nach dem Download
                         os.unlink(postcard_file)
-                        except Exception as e:
+                    except Exception as e:
                         st.error(f"Ein Fehler ist aufgetreten beim Erstellen der Postkarte: {str(e)}")
                         st.error(f"Detaillierter Fehler: {traceback.format_exc()}")
                         print(f"Detailed error: {traceback.format_exc()}")  # Dies wird in den Streamlit-Logs erscheinen
