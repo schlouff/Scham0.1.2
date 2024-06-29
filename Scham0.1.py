@@ -1,7 +1,10 @@
-#Scham mit Image_Generating v0.1
+#Scham mit Image_Generating v0.2
 import streamlit as st
+from pdf_utils import create_a6_pdf_with_image
 
-from postcard_utils import create_a6_postcard
+
+
+from postcard_utilsA6 import create_a6_postcard
 
 import os
 import time
@@ -90,51 +93,6 @@ def create_image_url(description_prompt):
     image_url = response.data[0].url
     return image_url
 
-# def create_and_save_image(artistic_description):
-
-
-#     image_prompt = f'{description_prompt}, Egon Schiele Style,'
-#     print(image_prompt)
-
-#     response = client.images.generate(
-#         model='dall-e-3',
-#         prompt=image_prompt,
-#         n=1,
-#         size='1024x1024'
-#     )
-
-#     image_url = response.data[0].url
-#     print()
-#     print(image_url)
-
-#     image_resource = requests.get(image_url, stream=True)
-#     print(image_resource.status_code)
-
-
-# #    image_filename = 'image01.png'
-
-#     if image_resource.status_code == 200:
-#         with open(image_filename, 'wb') as f:
-#             shutil.copyfileobj(image_resource.raw, f)
-#             return image_filename
-#     else:
-#         print('Error accessing the image!')
-#         return False
-
-# Debugging: Inhalt der Antwort anzeigen
-#    return response['data'][0]['url']
-
-
-#print(image_filename)
-
-#from PIL import Image
-
-#Image.open(image_filename)
-
-# for _ in range(3):
-#     image_filename = create_and_save_image(titles[_], 'white background')
-#     print(image_filename)
-
 
 
 if __name__ == '__main__':
@@ -190,24 +148,14 @@ if __name__ == '__main__':
                     st.write(f'Image URL: {image_url}')
                     st.image(image_url)
 
-                    try:
-                        # A6-Postkarte erstellen
-                        postcard_file = create_a6_postcard(image_url)
-
-                        # Download-Button für die Postkarte hinzufügen
-                        with open(postcard_file, "rb") as file:
-                            btn = st.download_button(
-                                label="A6-Postkarte herunterladen",
-                                data=file,
-                                file_name="a6_postkarte.pdf",
-                                mime="application/pdf"
-                            )
-
-                        # Lösche die temporäre Datei nach dem Download
-                        os.unlink(postcard_file)
-                    except Exception as e:
-                        st.error(f"Ein Fehler ist aufgetreten beim Erstellen der Postkarte: {str(e)}")
-                        st.error(f"Detaillierter Fehler: {traceback.format_exc()}")
-                        print(f"Detailed error: {traceback.format_exc()}")  # Dies wird in den Streamlit-Logs erscheinen
+                    # Erzeuge das PDF mit der generierten Bild-URL
+                    pdf = create_a6_pdf_with_image(image_url)
 
                     st.session_state.current_question_index += 1
+    if 'pdf' in locals():
+        st.download_button(
+            label="A6 PDF herunterladen",
+            data=pdf,
+            file_name="a6_pdf_mit_bild.pdf",
+            mime="application/pdf"
+        )
