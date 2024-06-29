@@ -7,13 +7,15 @@ from PIL import Image
 import requests
 from reportlab.lib.utils import ImageReader
 
-def create_a6_pdf_with_image(image_url):
+def create_10x15_pdf_with_image(image_url):
     buffer = io.BytesIO()
 
-    # A6 Seitengröße
-    page_width, page_height = A6
+    # 10x15 cm Seitengröße
+    # 10x15 cm Seitengröße
+    page_width = 10 * cm
+    page_height = 15 * cm
 
-    c = canvas.Canvas(buffer, pagesize=A6)
+    c = canvas.Canvas(buffer, pagesize=(page_width, page_height))
 
     # Berechnung der Bildgröße und Position
     margin = 0.5 * cm  # Schmaler Rand von 5mm

@@ -5,7 +5,7 @@
 # du bist ein test-branch1 Testkommentar2
 
 import streamlit as st
-from pdf_utils import create_a6_pdf_with_image
+from pdf_utils import create_10x15_pdf_with_image
 
 import os
 import time
@@ -147,14 +147,14 @@ if __name__ == '__main__':
                     st.image(image_url)
 
                     # Erzeuge das PDF mit der generierten Bild-URL
-                    pdf = create_a6_pdf_with_image(image_url)
+                    pdf = create_10x15_pdf_with_image(image_url)
 
                     st.session_state.current_question_index += 1
     if 'pdf' in locals():
         st.download_button(
-            label="A6 PDF herunterladen",
+            label="10x15 PDF herunterladen",
             data=pdf,
-            file_name="a6_pdf_mit_bild.pdf",
+            file_name="10x15_pdf_mit_bild.pdf",
             mime="application/pdf"
         )
 
