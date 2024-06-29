@@ -7,15 +7,8 @@
 import streamlit as st
 from pdf_utils import create_a6_pdf_with_image
 
-
-
-from postcard_utilsA6 import create_a6_postcard
-
 import os
 import time
-import openai
-import requests
-import shutil
 
 from openai import OpenAI
 
