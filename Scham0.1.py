@@ -4,7 +4,7 @@ import streamlit as st
 from io import BytesIO
 
 from pdf_utils import create_10x15_pdf_with_image
-
+from upload_pdf import upload_pdf_to_gcs
 
 import os
 import time
