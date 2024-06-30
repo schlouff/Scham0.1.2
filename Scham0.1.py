@@ -10,7 +10,7 @@ import os
 import time
 
 from openai import OpenAI
-
+from datetime import datetime
 
 # Setze den API-Schlüssel
 
@@ -153,17 +153,21 @@ if __name__ == '__main__':
         # Konvertieren Sie das PDF in ein BytesIO-Objekt
         pdf_bytes = BytesIO(pdf.getvalue())
 
-        # Laden Sie das PDF in Google Cloud Storage hoch
+        # Generiere einen Timestamp für den Dateinamen
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Lade das PDF in Google Cloud Storage hoch
         bucket_name = "vse-schamstaton24-07"
-        destination_blob_name = "MemePDFs/generated_pdf.pdf"
+        destination_blob_name = f"MemePDFs/generated_pdf_{timestamp}.pdf"
 
         # Angepasste upload_pdf_to_gcs Funktion aufrufen
         upload_pdf_to_gcs(bucket_name, pdf_bytes, destination_blob_name)
 
+        # Biete das PDF zum Download an
         st.download_button(
-            label="10x15 PDF herunterladen",
+            label=f"10x15 PDF herunterladen ({timestamp})",
             data=pdf,
-            file_name="10x15_pdf_mit_bild.pdf",
+            file_name=f"10x15_pdf_mit_bild_{timestamp}.pdf",
             mime="application/pdf"
         )
 
