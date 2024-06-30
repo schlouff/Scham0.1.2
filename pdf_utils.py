@@ -51,19 +51,19 @@ def create_10x15_pdf_with_image(image_url):
     buffer.seek(0)
     return buffer
 
-st.title('A6 PDF Creator mit quadratischem Bild')
-
-# Eingabefeld für Bild-URL
-image_url = st.text_input("Geben Sie die URL eines Bildes ein:")
-
-if st.button('PDF erstellen und herunterladen') and image_url:
-    try:
-        pdf = create_a6_pdf_with_image(image_url)
-        st.download_button(
-            label="A6 PDF herunterladen",
-            data=pdf,
-            file_name="a6_pdf_mit_bild.pdf",
-            mime="application/pdf"
-        )
-    except Exception as e:
-        st.error(f"Fehler beim Erstellen des PDFs: {str(e)}")
+# st.title('A6 PDF Creator mit quadratischem Bild')
+#
+# # Eingabefeld für Bild-URL
+# image_url = st.text_input("Geben Sie die URL eines Bildes ein:")
+#
+# if st.button('PDF erstellen und herunterladen') and image_url:
+#     try:
+#         pdf = create_a6_pdf_with_image(image_url)
+#         st.download_button(
+#             label="A6 PDF herunterladen",
+#             data=pdf,
+#             file_name="a6_pdf_mit_bild.pdf",
+#             mime="application/pdf"
+#         )
+#     except Exception as e:
+#         st.error(f"Fehler beim Erstellen des PDFs: {str(e)}")
