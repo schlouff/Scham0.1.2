@@ -1,11 +1,10 @@
 #Scham mit Image_Generating v0.2
 
-# du bist ein test-branch1 Testkommentar1
-
-# du bist ein test-branch1 Testkommentar2
-
 import streamlit as st
+from io import BytesIO
+
 from pdf_utils import create_10x15_pdf_with_image
+
 
 import os
 import time
@@ -151,6 +150,16 @@ if __name__ == '__main__':
 
                     st.session_state.current_question_index += 1
     if 'pdf' in locals():
+        # Konvertieren Sie das PDF in ein BytesIO-Objekt
+        pdf_bytes = BytesIO(pdf.getvalue())
+
+        # Laden Sie das PDF in Google Cloud Storage hoch
+        bucket_name = "vse-schamstaton24-07"
+        destination_blob_name = "MemePDFs/generated_pdf.pdf"
+
+        # Angepasste upload_pdf_to_gcs Funktion aufrufen
+        upload_pdf_to_gcs(bucket_name, pdf_bytes, destination_blob_name)
+
         st.download_button(
             label="10x15 PDF herunterladen",
             data=pdf,
