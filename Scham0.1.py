@@ -1,17 +1,16 @@
 #Scham mit Image_Generating v0.2
 
-# du bist ein test-branch1 Testkommentar1
-
-# du bist ein test-branch1 Testkommentar2
-
 import streamlit as st
+from io import BytesIO
+
 from pdf_utils import create_10x15_pdf_with_image
+from upload_pdf import upload_pdf_to_gcs
 
 import os
 import time
 
 from openai import OpenAI
-
+from datetime import datetime
 
 # Setze den API-Schlüssel
 
@@ -151,10 +150,24 @@ if __name__ == '__main__':
 
                     st.session_state.current_question_index += 1
     if 'pdf' in locals():
+        # Konvertieren Sie das PDF in ein BytesIO-Objekt
+        pdf_bytes = BytesIO(pdf.getvalue())
+
+        # Generiere einen Timestamp für den Dateinamen
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Lade das PDF in Google Cloud Storage hoch
+        bucket_name = "vse-schamstaton24-07"
+        destination_blob_name = f"MemePDFs/generated_pdf_{timestamp}.pdf"
+
+        # Angepasste upload_pdf_to_gcs Funktion aufrufen
+        upload_pdf_to_gcs(bucket_name, pdf_bytes, destination_blob_name)
+
+        # Biete das PDF zum Download an
         st.download_button(
-            label="10x15 PDF herunterladen",
+            label=f"10x15 PDF herunterladen ({timestamp})",
             data=pdf,
-            file_name="10x15_pdf_mit_bild.pdf",
+            file_name=f"10x15_pdf_mit_bild_{timestamp}.pdf",
             mime="application/pdf"
         )
 

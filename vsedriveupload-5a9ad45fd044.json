@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "vsedriveupload",
+  "private_key_id": "5a9ad45fd0449a3b8e701b9472dce3a8787b7250",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+vZv49meZrnf7\nlSqp7/E3RcHzBmsURAtywPKt2ZRS91IvR/S9mtDtGbfnC626cbmxJ3MoMFXI7i/v\nWc5kCER9ZOQDWW3yzWA1A5KrBepIiM9j20+BqHGOEibAXuoycwJ1k3LdEGG4K4TQ\n8yn6Z4eZDRp9CAeNimZGPQRiksL315sOlWGy+oZh1qno345NJSogk3HlmPn+ogWy\nluGMFKYTFBLxVFylW3UWcOqIhhlvSJ2PxQd0f5CHMI0yBMM3MdKirEP+F2IJSDg2\nZlD8dsckhNX2XsPHeaajsw0TmTJu7LqvF1Y7hdRdklbqsa+iqNjhluCIiDz+YSJG\n7ZbA7CC1AgMBAAECggEAA/3+4rAfAZ/m4MQGYUBg7GgN+GYmvam9ElEdKgv8u9uq\nY5Upt11+jQdKTzBEkMSIOq2E8vhHustFujY1BDHlrMsznKmesJqqnBKWm3SKauJx\n3+s0frFoGQjQS1I8rB5tMBJw8J5VQ4uBWSzxud9dEO+bhiRWarQCreqYPCalkoQA\npOcZ4OvX3LfHWKEIDKrIktHPcbvMXGo7tIGrN8JgnbEr8bT//79zCAVVDtc+mfiV\ng5/Im1ozxSBQ2CDL0jqgqT2GdJOdtaqmBMdpo8aVuP/W6tQzPO5LRWB7Rtg+uXf9\ndjF5aIetoOqSfCZ/U2f1AJcwsz3N7Iw8cRfZpPjrqQKBgQDnXt6bU5xbUQ9Pqulx\nAlLoDQFKmgc8QpyKgVlPx1grdugLLWGjoOrF+7dKfu0Rbcry8YkfFHQMcdvNTvmY\n95P9lS0V0ukkjd2LcfieG3yEOEacA56FweeoGDgvGJI4MXXhhg0SMtzcNdh7TrPy\nDsB16KgN+/RQzw9QHCqofbWh2QKBgQDTC4ZYM6eHUvC7pe6TaDGdpa3mMTPBA5jx\n/GZ8mxRTgshuAmnxSZjicoBQcJACpzneRsfyG6cw/0W7K+rd9uEdIzfS0B+3Tp/q\n0PIaZesH+lQyqjBc2FNtlFFfZxp+jlsqk/ImtH4YIAKLBAyAlj90WooGzI1OZrTP\nwK+wm18QPQKBgB+IioZY6uJ3NcMB5DcGvg3qV9a3D21jFrq5zlZVMOsblZyQXtJS\nSC0blWuNyPmrIRHjYXDe9MINcouUy+fRNlZFUpO63xOgUiWDLwM9c8cBdH4m8CAC\nwXPjeSTSEHugIhTOlFF6pSdOH2cO3u+Kmyh2wRDG2hF5ZvjgHeBA4dRhAoGAdfu1\naU3HVHHbvyvuil3vjvB2nX/YLQlz0aSHLxYLcPxmTInw7EF2xPG6Jj4nZDRUt5ze\nXs1y1IOBWjgdH2XLR9zOcn6DnJjJ8h5JmtRrZpRdyc03KFCPo20NaMZdG28+LDl1\nYIn7DEWo5kqnKqPUaZnMHCzyumfUoWhZT+QsawkCgYEA46AkE3mwqp+ydaw17kQS\nCKI3sh8paLDOY3bP8/KAlzhzCzkUd4VYc0WTnz996WbP/uFGvuffY1WA5IWZ3aS4\nTivYefXt5FctENIfEGFBHwI9ydpma+cKNsMlWPuK0Ou4fFdJlwN06tdwvcQ4xd8D\nuos7r5oEEk/OWgJXx2DkVv8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "scham-pdf-upload@vsedriveupload.iam.gserviceaccount.com",
+  "client_id": "109364444225279754953",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scham-pdf-upload%40vsedriveupload.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
