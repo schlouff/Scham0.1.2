@@ -176,7 +176,7 @@ if __name__ == '__main__':
                     st.image(image_url)
 
                     # Erzeuge das PDF mit der generierten Bild-URL
-                    pdf = create_10x15_pdf_with_image(image_url)
+                    pdf = create_10x15_pdf_with_image(image_url, st.session_state.user_name)
 
                     st.session_state.current_question_index += 1
     if 'pdf' in locals():
