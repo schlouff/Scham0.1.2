@@ -99,6 +99,36 @@ if __name__ == '__main__':
     with col2:
         st.image('ai.png', width=70)
 
+    # Neues Eingabefeld für den Namen
+    if 'user_name' not in st.session_state:
+        st.session_state.user_name = ""
+
+    if not st.session_state.user_name:
+        st.write("Damit wir dir am Ende dein geschaffenes Bild übergeben können, brauchen wir deinen Namen. Bitte gib hier deinen Namen ein.")
+        user_name = st.text_input("Dein Name:")
+        if st.button("Name bestätigen"):
+            if user_name:
+                st.session_state.user_name = user_name
+                print(f"Benutzername: {st.session_state.user_name}")  # Anzeige im Terminal
+                st.success(f"Danke, {st.session_state.user_name}! Lass uns beginnen.")
+                st.write(f"Eingegebener Name: {st.session_state.user_name}")  # Anzeige in der Streamlit-App
+            else:
+                st.warning("Bitte gib deinen Namen ein.")
+    else:
+        # Anzeige des gespeicherten Namens, wenn bereits eingegeben
+        st.write(f"Eingegebener Name: {st.session_state.user_name}")
+        print(f"Gespeicherter Benutzername: {st.session_state.user_name}")  # Anzeige im Terminal bei jedem Neustart
+
+    # Nur den Chat-Bot anzeigen, wenn der Name eingegeben wurde
+    if st.session_state.user_name:
+        if 'current_question_index' not in st.session_state:
+            st.session_state.current_question_index = 0
+
+        if 'responses' not in st.session_state:
+            st.session_state.responses = []
+
+
+
     if 'current_question_index' not in st.session_state:
         st.session_state.current_question_index = 0
 
