@@ -7,7 +7,7 @@ from PIL import Image
 import requests
 from reportlab.lib.utils import ImageReader
 
-def create_10x15_pdf_with_image(image_url):
+def create_10x15_pdf_with_image(image_url, user_name):
     buffer = io.BytesIO()
 
     # 10x15 cm Seitengröße
@@ -55,6 +55,13 @@ def create_10x15_pdf_with_image(image_url):
     # Bild in PDF einfügen
     img_reader = ImageReader(img)
     c.drawImage(img_reader, x, y, width=image_width, height=image_height)
+
+    # Namen hinzufügen
+    c.setFillColorRGB(0.5, 0.5, 0.5)  # Grau
+    c.setFont("Helvetica", 8)  # Schriftart und -größe
+    name_text = f"created by: {user_name}"
+    text_width = c.stringWidth(name_text, "Helvetica", 8)
+    c.drawString(page_width - text_width - margin, margin, name_text)
 
     c.save()
     buffer.seek(0)
