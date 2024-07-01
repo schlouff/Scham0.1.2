@@ -15,7 +15,12 @@ def create_10x15_pdf_with_image(image_url):
     page_width = 10 * cm
     page_height = 15 * cm
 
-    c = canvas.Canvas(buffer, pagesize=(page_width, page_height))
+    c = canvas.Canvas(buffer, pagesize=(page_width, page_height), pdfVersion=(1, 5))
+
+    # Metadaten hinzufügen
+    c.setTitle("Generated Image PDF")
+    c.setAuthor("Automated System")
+    c.setSubject("Image PDF")
 
     # Berechnung der Bildgröße und Position
     margin = 0.5 * cm  # Schmaler Rand von 5mm
@@ -25,6 +30,10 @@ def create_10x15_pdf_with_image(image_url):
     # Bild von URL herunterladen
     response = requests.get(image_url)
     img = Image.open(io.BytesIO(response.content))
+
+    # Bild in RGB-Modus konvertieren (falls es im CMYK-Modus ist)
+    if img.mode == 'CMYK':
+        img = img.convert('RGB')
 
     # Seitenverhältnis des Bildes berechnen
     img_ratio = img.width / img.height
